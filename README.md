@@ -8,7 +8,7 @@ WingDing Winter 2019
 |-------------|------------------------------------------|----------|-----------|
 | Wed, Feb 27 | CH01: Introduction                       | 12 Pages | @beauhoyt |
 |             | CH02, Creating and Running Containers    | 11 Pages |           |
-| Wed, Mar 13 | CH03, Deploying a Kubernetes Cluster     | 10 Pages | ?????     |
+| Wed, Mar 13 | CH03, Deploying a Kubernetes Cluster     | 10 Pages | BobK      |
 |             | CH04, Common kubectl Commands            |  5 Pages |           |
 | Wed, Mar 27 | CH05, Pods                               | 22 Pages | ?????     |
 |             | CH06, Labels and Annotations             | 10 Pages |           |

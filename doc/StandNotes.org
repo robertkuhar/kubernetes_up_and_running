@@ -3,7 +3,7 @@
 ** Chapter one - Introduction
    - Velocity is important! I would say rather Agility is the word, but ok.
    - Mostly marketing chapter.
-   - The ideas here (immutable releases with declarative configuration work equally well
+   - The ideas here (immutable releases with declarative configuration) work equally well
      at the code module level with source control. Only check in code that triggers a
      successful build/test/deploy cycle.
 ** Chapter two - Creating and Running Containers

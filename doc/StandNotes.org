@@ -1,16 +1,22 @@
 * Stan's Kubernetes Book Notes
 
-** Chapter one - Introduction
-   - Velocity is important! I would say rather Agility is the word, but ok.
-   - Mostly marketing chapter.
-   - The ideas here (immutable releases with declarative configuration) work equally well
-     at the code module level with source control. Only check in code that triggers a
-     successful build/test/deploy cycle.
-** Chapter two - Creating and Running Containers
-   * There is a [[https://github.com/kubernetes-up-and-running/kuard][docker container project]] for this chapter.
-   * Three is an Open Container Initiative project.
-   * I'm keeping my clone of =kuard= at =~/Documents/projects/wingdings/kuard=.
-   * It is deployed on asus but I have it mapped to port 3000 so I can see it on my
-     Chromebook at http://localhost:3000 when I ssh into that machine.
-   * I'm not able to enable =--memory-swap=. Perhaps I need a later version of the docker
-     daemon? Or maybe my cpu can't do it?
+** Session 1
+   2/27/2019
+   - Beau suggested installing [[https://github.com/kubernetes/minikube][minikube]] as an alternative to using GCP or other cloud
+     providers offerings.
+   - Constantine took over and gave a fabulous overview presentation of the whole book. :)
+
+*** Chapter one - Introduction
+    - Velocity is important! I would say rather Agility is the word, but ok.
+    - Mostly marketing chapter.
+    - The ideas here (immutable releases with declarative configuration) work equally well
+      at the code module level with source control. Only check in code that triggers a
+      successful build/test/deploy cycle.
+*** Chapter two - Creating and Running Containers
+    * There is a [[https://github.com/kubernetes-up-and-running/kuard][docker container project]] for this chapter.
+    * Three is an Open Container Initiative project.
+    * I'm keeping my clone of =kuard= at =~/Documents/projects/wingdings/kuard=.
+    * It is deployed on asus but I have it mapped to port 3000 so I can see it on my
+      Chromebook at http://localhost:3000 when I ssh into that machine.
+    * I'm not able to enable =--memory-swap=. Perhaps I need a later version of the docker
+      daemon? Or maybe my cpu can't do it?

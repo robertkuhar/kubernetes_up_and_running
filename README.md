@@ -10,7 +10,7 @@ WingDing Winter 2019
 |             | CH02: Creating and Running Containers    |    11 |           |
 | Wed, Mar 27 | CH03: Deploying a Kubernetes Cluster     |    10 | BobK      |
 |             | CH04: Common kubectl Commands            |     5 |           |
-| Wed, Apr 10 | CH05: Pods                               |    22 | ?????     |
+| Wed, Apr 10 | CH05: Pods                               |    22 | @beauhoyt |
 |             | CH06: Labels and Annotations             |    10 |           |
 | Wed, Apr 24 | CH07: Service Discovery                  |    14 | ?????     |
 |             | CH08: ReplicaSets                        |    11 |           |

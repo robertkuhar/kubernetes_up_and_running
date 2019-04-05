@@ -20,3 +20,83 @@
       Chromebook at http://localhost:3000 when I ssh into that machine.
     * I'm not able to enable =--memory-swap=. Perhaps I need a later version of the docker
       daemon? Or maybe my cpu can't do it?
+** Session 2
+
+   3/13/2019
+   * Back to chapters 1 and 2.
+** Session 3
+   * I have installed minikube on asus. I followed the [[https://kubernetes.io/docs/tasks/tools/install-minikube/][instructions]] on the kubernetes
+     site.
+** Session 5
+
+*** Chapter 5
+    - Pods should not contain container that can be separate (e.g. a MySQL and Database
+      container shouldn't be in the same pod. This is different from docker compose where
+      that is a common setup.
+    * Here is a pod manifest
+
+      #+BEGIN_SRC yaml :tangle kuard-pod.yaml
+        apiVersion: v1
+        kind: Pod
+        metadata:
+          name: kuard
+        spec:
+          volumes:
+            - name: "kuard-data"
+              hostPath:
+                path: "/var/lib/kuard"
+          containers:
+            - image: gcr.io/kuar-demo/kuard-amd64:1
+              name: kuard
+              volumeMounts:
+                - mountPath: "/data"
+                  name: "kuard-data"
+              resources:
+                requests:
+                  cpu: "500m"
+                  memory: "127Mi"
+                limits:
+                  cpu: "1000m"
+                  memory: "256Mi"
+              readinessProbe:
+                httpGet:
+                  path: /ready
+                  port: 8080
+                initialDelaySeconds: 30
+                timeoutSeconds: 1
+                periodSeconds: 10
+                failureThreshold: 3
+              livenessProbe:
+                httpGet:
+                  path: /healthy
+                  port: 8080
+                initialDelaySeconds: 5
+                timeoutSeconds: 1
+                periodSeconds: 10
+                failureThreshold: 3
+              ports:
+                - containerPort: 8080
+                  name: http
+                  protocol: TCP
+      #+END_SRC
+      * This only works if I use port 8080 for some reason. Here are the commands for
+        things
+
+     Create Pod
+     #+BEGIN_SRC bash
+       kubectl apply -f kuard-pod.yaml
+     #+END_SRC
+
+     Port forward
+     #+BEGIN_SRC bash
+       kubectl port-forward kuard 3000:8080
+     #+END_SRC
+
+     Delete pod
+     #+BEGIN_SRC bash
+       kubectl delete -f kuard-pod.yaml
+     #+END_SRC
+
+     There is this memq memory queue thing on that kuard pod. I created a rudimentary
+     [[./memqrequests.json][Postman requests set]] that creates a queue, enqueues something, deletes a queue and
+     checks the stats.

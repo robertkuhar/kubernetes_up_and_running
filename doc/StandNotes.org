@@ -25,14 +25,18 @@
    3/13/2019
    * Back to chapters 1 and 2.
 ** Session 3
+   I was unable to attend.
+** Session 4
    * I have installed minikube on asus. I followed the [[https://kubernetes.io/docs/tasks/tools/install-minikube/][instructions]] on the kubernetes
      site.
+   * Constantine mentioned [[https://github.com/helm/charts][helm charts]] as a repository for application definitions for
+     kubernetes.
 ** Session 5
 
 *** Chapter 5
-    - Pods should not contain container that can be separate (e.g. a MySQL and Database
-      container shouldn't be in the same pod. This is different from docker compose where
-      that is a common setup.
+    - Pods should not contain container that can be separate. For example, a MySQL and
+      Database container shouldn't be in the same pod. This is different from docker
+      compose where that is a common setup.
     * Here is a pod manifest
 
       #+BEGIN_SRC yaml :tangle kuard-pod.yaml
@@ -79,24 +83,27 @@
                   name: http
                   protocol: TCP
       #+END_SRC
-      * This only works if I use port 8080 for some reason. Here are the commands for
-        things
 
-     Create Pod
-     #+BEGIN_SRC bash
-       kubectl apply -f kuard-pod.yaml
-     #+END_SRC
+    This only works if I use port 8080 for some reason. Here are the commands for things
 
-     Port forward
-     #+BEGIN_SRC bash
-       kubectl port-forward kuard 3000:8080
-     #+END_SRC
+    Create Pod
+    #+BEGIN_SRC bash
+      kubectl apply -f kuard-pod.yaml
+    #+END_SRC
 
-     Delete pod
-     #+BEGIN_SRC bash
-       kubectl delete -f kuard-pod.yaml
-     #+END_SRC
+    Port forward
+    #+BEGIN_SRC bash
+      kubectl port-forward kuard 3000:8080
+    #+END_SRC
 
-     There is this memq memory queue thing on that kuard pod. I created a rudimentary
-     [[./memqrequests.json][Postman requests set]] that creates a queue, enqueues something, deletes a queue and
-     checks the stats.
+    After you run this, you should be able to go to [[http://localhost:3000/]] and see the
+    kuard application.
+
+    Delete pod
+    #+BEGIN_SRC bash
+      kubectl delete -f kuard-pod.yaml
+    #+END_SRC
+
+    There is this memq memory queue thing on that kuard pod. I created a rudimentary
+    [[./memqrequests.json][Postman requests set]] that creates a queue, enqueues something, deletes a queue and
+    checks the stats.

@@ -12,10 +12,10 @@ spec:
   containers:
     - image: gcr.io/kuar-demo/kuard-amd64:1
       name: kuard
-      # Example 5-5 adds Persistend Data and Volumes
-      volumeMounts:
-        - mountPath: "/data"
-          name: "kuard-data"
+      ports:
+        - containerPort: 8080
+          name: http
+          protocol: TCP
       # Example 5-3 and 5-4 set min (requests) and max (limits) resources
       resources:
         requests:
@@ -24,6 +24,10 @@ spec:
         limits:
           cpu: "1000m"
           memory: "256Mi"
+      # Example 5-5 adds Persistend Data and Volumes
+      volumeMounts:
+        - mountPath: "/data"
+          name: "kuard-data"
       # Example 5-2 adds livenessProbe
       livenessProbe:
         httpGet:
@@ -33,7 +37,12 @@ spec:
         timeoutSeconds: 1
         periodSeconds: 10
         failureThreshold: 3
-      ports:
-        - containerPort: 8080
-          name: http
-          protocol: TCP
+      # Example 5-6 shows the readinessProbe
+      readinessProbe:
+        httpGet:
+          path: /ready
+          port: 8080
+        initialDelaySeconds: 30
+        timeoutSeconds: 1
+        periodSeconds: 10
+        failureThreshold: 3

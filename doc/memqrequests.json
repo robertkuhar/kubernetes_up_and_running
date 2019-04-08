@@ -21,7 +21,7 @@
         {
             "name": "Add memq queue",
             "request": {
-                "url": "http://localhost:3000/memq/server/queues/foo",
+                "url": "http://localhost:3000/memq/server/queues/keygen",
                 "method": "PUT",
                 "header": [],
                 "body": {},
@@ -32,7 +32,7 @@
         {
             "name": "enqueue something",
             "request": {
-                "url": "http://localhost:3000/memq/server/queues/foo/enqueue",
+                "url": "http://localhost:3000/memq/server/queues/keygen/enqueue",
                 "method": "POST",
                 "header": [],
                 "body": {
@@ -46,7 +46,7 @@
         {
             "name": "delete queue",
             "request": {
-                "url": "http://localhost:3000/memq/server/queues/foo",
+                "url": "http://localhost:3000/memq/server/queues/keygen",
                 "method": "DELETE",
                 "header": [],
                 "body": {},

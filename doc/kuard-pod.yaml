@@ -13,6 +13,8 @@ spec:
       volumeMounts:
         - mountPath: "/data"
           name: "kuard-data"
+        - mountPath: "/home"
+          name: "stand-data"
       resources:
         requests:
           cpu: "500m"

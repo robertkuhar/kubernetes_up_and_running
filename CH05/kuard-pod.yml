@@ -4,9 +4,18 @@ kind: Pod
 metadata:
   name: kuard
 spec:
+  # Example 5-5 adds Persistent Data and Volumes
+  volumes:
+      - name: "kuard-data"
+        hostPath:
+          path: "/var/kib/kuard"
   containers:
     - image: gcr.io/kuar-demo/kuard-amd64:1
       name: kuard
+      # Example 5-5 adds Persistend Data and Volumes
+      volumeMounts:
+        - mountPath: "/data"
+          name: "kuard-data"
       # Example 5-3 and 5-4 set min (requests) and max (limits) resources
       resources:
         requests:

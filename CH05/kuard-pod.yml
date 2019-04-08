@@ -7,6 +7,23 @@ spec:
   containers:
     - image: gcr.io/kuar-demo/kuard-amd64:1
       name: kuard
+      # Example 5-3 and 5-4 set min (requests) and max (limits) resources
+      resources:
+        requests:
+          cpu: "500m"
+          memory: "128Mi"
+        limits:
+          cpu: "1000m"
+          memory: "256Mi"
+      # Example 5-2 adds livenessProbe
+      livenessProbe:
+        httpGet:
+          path: /healthy
+          port: 8080
+        initialDelaySeconds: 5
+        timeoutSeconds: 1
+        periodSeconds: 10
+        failureThreshold: 3
       ports:
         - containerPort: 8080
           name: http

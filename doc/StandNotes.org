@@ -1,0 +1,127 @@
+* Stan's Kubernetes Book Notes
+
+** Session 1
+   2/27/2019
+   - Beau suggested installing [[https://github.com/kubernetes/minikube][minikube]] as an alternative to using GCP or other cloud
+     providers offerings.
+   - Constantine took over and gave a fabulous overview presentation of the whole book. :)
+
+*** Chapter one - Introduction
+    - Velocity is important! I would say rather Agility is the word, but ok.
+    - Mostly marketing chapter.
+    - The ideas here (immutable releases with declarative configuration) work equally well
+      at the code module level with source control. Only check in code that triggers a
+      successful build/test/deploy cycle.
+*** Chapter two - Creating and Running Containers
+    * There is a [[https://github.com/kubernetes-up-and-running/kuard][docker container project]] for this chapter.
+    * Three is an Open Container Initiative project.
+    * I'm keeping my clone of =kuard= at =~/Documents/projects/wingdings/kuard=.
+    * It is deployed on asus but I have it mapped to port 3000 so I can see it on my
+      Chromebook at http://localhost:3000 when I ssh into that machine.
+    * I'm not able to enable =--memory-swap=. Perhaps I need a later version of the docker
+      daemon? Or maybe my cpu can't do it?
+** Session 2
+
+   3/13/2019
+   * Back to chapters 1 and 2.
+** Session 3
+   I was unable to attend.
+** Session 4
+   * I have installed minikube on asus. I followed the [[https://kubernetes.io/docs/tasks/tools/install-minikube/][instructions]] on the kubernetes
+     site.
+   * Constantine mentioned [[https://github.com/helm/charts][helm charts]] as a repository for application definitions for
+     kubernetes.
+** Session 5
+
+*** Chapter 5
+    - Pods should not contain container that can be separate. For example, a MySQL and
+      Database container shouldn't be in the same pod. This is different from docker
+      compose where that is a common setup.
+    * Here is a pod manifest
+
+      #+BEGIN_SRC yaml :tangle kuard-pod.yaml
+        apiVersion: v1
+        kind: Pod
+        metadata:
+          name: kuard
+        spec:
+          volumes:
+            - name: "kuard-data"
+              hostPath:
+                path: "/var/lib/kuard"
+          containers:
+            - image: gcr.io/kuar-demo/kuard-amd64:1
+              name: kuard
+              volumeMounts:
+                - mountPath: "/data"
+                  name: "kuard-data"
+                - mountPath: "/home"
+                  name: "stand-data"
+              resources:
+                requests:
+                  cpu: "500m"
+                  memory: "127Mi"
+                limits:
+                  cpu: "1000m"
+                  memory: "256Mi"
+              readinessProbe:
+                httpGet:
+                  path: /ready
+                  port: 8080
+                initialDelaySeconds: 30
+                timeoutSeconds: 1
+                periodSeconds: 10
+                failureThreshold: 3
+              livenessProbe:
+                httpGet:
+                  path: /healthy
+                  port: 8080
+                initialDelaySeconds: 5
+                timeoutSeconds: 1
+                periodSeconds: 10
+                failureThreshold: 3
+              ports:
+                - containerPort: 8080
+                  name: http
+                  protocol: TCP
+      #+END_SRC
+
+    This only works if I use port 8080 for some reason. Here are the commands for things
+
+    Create Pod
+    #+BEGIN_SRC bash
+      kubectl apply -f kuard-pod.yaml
+    #+END_SRC
+
+    Port forward
+    #+BEGIN_SRC bash
+      kubectl port-forward kuard 3000:8080
+    #+END_SRC
+
+    After you run this, you should be able to go to [[http://localhost:3000/]] and see the
+    kuard application.
+
+    Delete pod
+    #+BEGIN_SRC bash
+      kubectl delete -f kuard-pod.yaml
+    #+END_SRC
+
+    There is this memq memory queue thing on that kuard pod. I created a rudimentary
+    [[./memqrequests.json][Postman requests set]] that creates a queue, enqueues something, deletes a queue and
+    checks the stats.
+*** Chapter 6 Labels and Annotations
+    * Labels are arbitrary key/value pairs that you apply to kubernetes objects. They can
+      be namespaced with domain subdomain values.
+
+      Create some deployment objects with labels
+
+      #+BEGIN_SRC bash
+        kubectl run alpaca-prod --image=gcr.io/kuar-demo/kuard-amd64:1 --replicas=2 --labels="ver=1,app=alpaca,env=prod"
+        kubectl run alpaca-test --image=gcr.io/kuar-demo/kuard-amd64:2 --replicas=1 --labels="ver=2,app=alpaca,env=test"
+        kubectl run bandicoot-prod --image=gcr.io/kuar-demo/kuard-amd64:2 --replicas=2 --labels="ver=2,app=bandicoot,env=prod"
+        kubectl run bandicoot-staging --image=gcr.io/kuar-demo/kuard-amd64:2 --replicas=1 --labels="ver=2,app=bandicoot,env=staging"
+      #+END_SRC
+
+      Look at labels with the =--show-labels= switch.
+
+    * Annotations are basically the same as labels except they are just text values.

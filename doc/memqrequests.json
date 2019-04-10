@@ -1,0 +1,58 @@
+{
+    "variables": [],
+    "info": {
+        "name": "kubernetes book",
+        "_postman_id": "fb01bb59-6f6e-148c-a7b1-dc0d2bf41a73",
+        "description": "",
+        "schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+    },
+    "item": [
+        {
+            "name": "Memq Stats",
+            "request": {
+                "url": "http://localhost:3000/memq/server/stats",
+                "method": "GET",
+                "header": [],
+                "body": {},
+                "description": ""
+            },
+            "response": []
+        },
+        {
+            "name": "Add memq queue",
+            "request": {
+                "url": "http://localhost:3000/memq/server/queues/keygen",
+                "method": "PUT",
+                "header": [],
+                "body": {},
+                "description": ""
+            },
+            "response": []
+        },
+        {
+            "name": "enqueue something",
+            "request": {
+                "url": "http://localhost:3000/memq/server/queues/keygen/enqueue",
+                "method": "POST",
+                "header": [],
+                "body": {
+                    "mode": "raw",
+                    "raw": "Yo dude!"
+                },
+                "description": ""
+            },
+            "response": []
+        },
+        {
+            "name": "delete queue",
+            "request": {
+                "url": "http://localhost:3000/memq/server/queues/keygen",
+                "method": "DELETE",
+                "header": [],
+                "body": {},
+                "description": ""
+            },
+            "response": []
+        }
+    ]
+}

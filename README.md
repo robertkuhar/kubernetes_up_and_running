@@ -14,7 +14,7 @@ WingDing Winter 2019
 |             | CH06: Labels and Annotations              |    10 |           |
 | Wed, Apr 24 | CH07: Service Discovery                   |    14 | @beauhoyt |
 |             | CH08: ReplicaSets                         |    11 |           |
-| Wed, May 08 | CH09: DaemonSets                          |     9 | ?????     |
+| Wed, May 08 | CH09: DaemonSets                          |     9 | @beauhoyt |
 |             | CH10: Jobs                                |    14 |           |
 | Wed, May 22 | CH11: ConfigMaps and Secrets              |    15 | Piotr     |
 |             | CH12: Deployments                         |    19 |           |

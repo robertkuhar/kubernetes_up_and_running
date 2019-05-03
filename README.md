@@ -13,11 +13,12 @@ WingDing Winter 2019
 | Wed, Apr 10 | CH05: Pods                                |    22 | StanD     |
 |             | CH06: Labels and Annotations              |    10 |           |
 | Wed, Apr 24 | CH07: Service Discovery                   |    14 | @beauhoyt |
-| Wed, May 08 | CH08: ReplicaSets                         |    11 | @beauhoyt |
+| Wed, May 08 | canceled                                  |       |           |
+| Wed, May 22 | CH08: ReplicaSets                         |    11 | @beauhoyt |
 |             | CH09: DaemonSets                          |     9 |           |
-| Wed, May 22 | CH10: Jobs                                |    14 | Piotr     |
+| Wed, Jun 12 | CH10: Jobs                                |    14 | Piotr     |
 |             | CH11: ConfigMaps and Secrets              |    15 |           |
-| Wed, Jun 12 | CH12: Deployments                         |    19 | ?????     |
+| Wed, Jun 26 | CH12: Deployments                         |    19 | ?????     |
 |             | CH13: Integrating Storage Solutions       |    20 |           |
 |             | CH14: Deploying Real-World Applications   |    13 |           |
 | ???         | Building a Raspberry Pi Kubernetes Cluster|     8 |           |

@@ -18,7 +18,7 @@ WingDing Winter 2019
 |             | CH09: DaemonSets                               |     9 | Siegfried |
 | Wed, Jun 12 | CH10: Jobs                                     |    14 | Piotr     |
 |             | CH11: ConfigMaps and Secrets                   |    15 | Piotr     |
-|             | CH12: Deployments                              |    19 | BobK      |
+|             | CH12: Deployments                              |    19 | Siegfried |
 |             | CH13: Integrating Storage Solutions            |    20 | BobK      |
 |             | CH14: Deploying Real-World Applications        |    13 | BobK      |
 | none        | ~~Building a Raspberry Pi Kubernetes Cluster~~ |     8 |           |
